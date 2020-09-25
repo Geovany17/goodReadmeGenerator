@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const axios = require("axios");
-const util = require("util");
+const utils = require("utils");
 
 // Internal modules
 const api = require("./utils/api.js");
@@ -42,7 +42,7 @@ const questions = [
   },
   {
     type: "input",
-    name: "contributors",
+    name: "contributing",
     message:
       "If applicable, provide guidelines on how other developers can contribute to your project.",
   },
@@ -93,7 +93,7 @@ function writeToFile(fileName, data) {
   });
 }
 
-// const writeFileAsync = util.promisify(writeToFile);
+const writeFileAsync = utils.promisify(writeToFile);
 
 // function to initialize program
 async function init() {

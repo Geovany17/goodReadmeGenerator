@@ -1,5 +1,6 @@
 // function to generate markdown for README
 function generateMarkdown(userResponses) {
+  // Generate Table of Contents conditionally based on userResponses
   return `# ${userResponses.title}\n
 
   ${userResponses.badge}\n
@@ -10,7 +11,7 @@ ${userResponses.description}\n
 - [Installation](#Installation)
 - [Usage](#Usage)
 - [Licence](#Licence)
-- [Contributors](#Contributors)
+- [Contributing](#Contributing)
 - [Test](#Test)
 - [Repository Link](#Repository)
 - [GitHub Info](#GitHub) 
@@ -27,9 +28,9 @@ ${userResponses.test}\n
 ## Repository
 - [Project Repo](${userResponses.repo})\n
 ## GitHub
-- ${userResponses.name}
-- [GitHub Profile](${userResponses.profile})
-- <${userResponses.email}>
+- ${userResponses.name}\n
+- [GitHub Profile](${userResponses.profile})\n
+- <${userResponses.email}>\n
 
 `;
 }
