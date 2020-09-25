@@ -4,6 +4,11 @@ function generateMarkdown(userResponses) {
   return `# ${userResponses.title}\n
 
   ${userResponses.badge}\n
+  [![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/releases/)
+  ([![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+  
+  
+  Check out the badges hosted by [shields.io](https://shields.io/).
 ## Description 
 ${userResponses.description}\n
 ## Table of contents
@@ -28,10 +33,7 @@ ${userResponses.test}\n
 ## Repository
 - [Project Repo](${userResponses.repo})\n
 ## GitHub
-- ${userResponses.name}\n
 - [GitHub Profile](${userResponses.profile})\n
-- <${userResponses.email}>\n
-
 `;
 }
 

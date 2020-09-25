@@ -1,13 +1,14 @@
+//========================
 // External NPM
+//=======================
 const inquirer = require("inquirer");
 const fs = require("fs");
 const axios = require("axios");
-const utils = require("utils");
-
 // Internal modules
-const api = require("./utils/api.js");
 const generateMarkdown = require("./utils/generateMarkdown.js");
+//=================================
 // array of questions for user
+//===================================
 const questions = [
   {
     type: "input",
@@ -47,6 +48,9 @@ const questions = [
       "If applicable, provide guidelines on how other developers can contribute to your project.",
   },
   {
+    //==================================
+    //User can choose from a list of license
+    //==================================
     type: "list",
     name: "license",
     message: "Choose your license:",
@@ -82,44 +86,36 @@ const questions = [
   },
 ];
 
-// function to write README file
-function writeToFile(fileName, data) {
-  fs.writeFile(fileName, data, (err) => {
-    if (err) {
-      return console.log(err);
-    }
+//=============================================
+// function to initialize program
+//=============================================
+async function init() {
+  inquirer.prompt(questions).then(function (data) {
+    const queryUrl = `https://api.github.com/users/${data.username}`;
 
-    console.log("Success! Your README.md file has been generated");
+    axios.get(queryUrl).then(function (res) {
+      const githubInfo = {
+        githubImage: res.data.avatar_url,
+        email: res.data.email,
+        profile: res.data.html_url,
+        name: res.data.name,
+      };
+
+      fs.writeFile(
+        "newREADME.md",
+        generateMarkdown(data, githubInfo),
+        function (err) {
+          if (err) {
+            throw err;
+          }
+
+          console.log("New README file created with success!");
+        }
+      );
+    });
   });
 }
-
-const writeFileAsync = utils.promisify(writeToFile);
-
-// function to initialize program
-async function init() {
-  try {
-    // Prompt Inquirer questions
-    const userResponses = await inquirer.prompt(questions);
-    console.log("Your responses: ", userResponses);
-    console.log(
-      "Thank you for your responses! Fetching your GitHub data next..."
-    );
-
-    // Call GitHub api for user info
-    const userInfo = await api.getUser(userResponses);
-    console.log("Your GitHub user info: ", userInfo);
-
-    // Pass Inquirer userResponses and GitHub userInfo to generateMarkdown
-    console.log("Generating your README next...");
-    const markdown = generateMarkdown(userResponses, userInfo);
-    console.log(markdown);
-
-    // Write markdown to file
-    await writeFileAsync("ExampleREADME.md", markdown);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
+//===========================================
 // function call to initialize program
+//===========================================
 init();

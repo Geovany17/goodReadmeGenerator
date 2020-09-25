@@ -3,14 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "dependencies": {
+    "api": "^2.3.1",
+    "axios": "^0.20.0",
+    "fs": "^0.0.1-security",
+    "inquirer": "^7.3.3",
+    "utils": "^0.3.1",
+    "util": "^0.12.3"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Geovany17/goodReadmeGenerator.git"
+  },
   "author": "Geovany Cardoza",
   "license": "MIT",
-  "dependencies": {
-    "axios": "^0.20.0",
-    "fs": "0.0.1-security",
-    "inquirer": "^7.3.3"
-  }
+  "bugs": {
+    "url": "https://github.com/Geovany17/goodReadmeGenerator/issues"
+  },
+  "homepage": "https://github.com/Geovany17/goodReadmeGenerator#readme"
 }
